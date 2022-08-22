@@ -1,0 +1,38 @@
+//Grids
+
+//while
+$numero: 1;
+
+@while $numero <= 6 {
+  .type-#{$numero} {
+    font-size: 16 * $numero + px;
+  }
+  $numero: $numero + 3;
+}
+
+//for
+@for $i from 1 through 16 {
+  $width: percentage.round(1 / $i);
+  .porcento-#{$i} {
+    width: $width;
+  }
+}
+
+$container: 768;
+$gutter: 20;
+$colunas: 12;
+
+@for $i from 1 through 12 {
+  $width: $container / $colunas * $i - $gutter;
+  .grid-#{$i} {
+    width: $width + px;
+  }
+}
+
+//each
+$lista: facebook twitter linkedin instagram;
+@each $item in $lista {
+  .rede-#{$item} {
+    background-image: url("../img/#{$item}.png");
+  }
+}

@@ -1,0 +1,147 @@
+@function grid($colunas, $total: 12) {
+  @return ($colunas / $total) * 100%;
+}
+div {
+  width: grid(2);
+}
+
+@function rem($pixels, $contexto: 16) {
+  @return ($pixels / $contexto) * 1rem
+}
+
+
+$tema: oceano;
+$primary-color: black;
+$secondary-color: gray;
+
+@if $tema == oceano {
+  $primary-color: pink;
+  $secondary-color: #84e;
+} @else if $tema == deserto {
+  $primary-color: brown;
+  $secondary-color: purple;
+}
+
+.erro {
+  color: red;
+  font-weight: bold;
+}
+
+.button-erro {
+  @extend .erro;
+  padding: 20px;
+  width: 200px;
+}
+
+@mixin title-large {
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: monospace;
+  line-height: 1;
+}
+
+@mixin border-box {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+@mixin separador($color: #84e, $largura: 100px) {
+  &::after {
+    content: "";
+    display: block;
+    width: $largura;
+    height: 4px;
+    background: $cor-primaria;
+  }
+}
+
+@mixin box-shadow($shadow...) {
+  box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  -webkit-box-shadow: $shadow;
+}
+
+p {
+  color: $primary-color;
+  background: $secondary-color;
+}
+
+@mixin mobile {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+$cor-primaria: #84e;
+$font-primaria: monospace;
+$gutter: 60px;
+
+section {
+  max-width: 600px;
+  margin: 0 auto;
+  @include border-box;
+}
+
+.modal {
+  @include box-shadow(
+    1px 0px 0 0 rgba(0, 0, 0, 0.5),
+    1px 0px 0 0 rgba(0, 0, 0, 0.5),
+    1px 0px 0 0 rgba(0, 0, 0, 0.5)
+  );
+
+  h1 {
+    color: #84e;
+    font-family: monospace;
+    margin-bottom: 60px;
+    @include title-large;
+    @include separador(#84e, 200px);
+    @include mobile {
+      color: pink;
+      font-size: 2rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    max-width: 400px;
+    font-family: monospace;
+  }
+
+  a {
+    display: block;
+    max-width: 120px;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    color: white;
+    background: $cor-primaria;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: $font-primaria;
+  }
+}
+
+ul {
+  text-align: center;
+  li {
+    display: inline-block;
+    list-style: none;
+    font-size: rem(24);
+    a {
+      display: block;
+      padding: 20px;
+      text-decoration: none;
+      background: $cor-primaria;
+      border-radius: 4px;
+      color: white;
+      &:hover, &.active {
+        background: darken(blue, 20%);
+      }
+    }
+  }
+}
